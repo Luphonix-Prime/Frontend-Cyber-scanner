@@ -316,7 +316,7 @@ const form = document.getElementById("myForm");
     e.preventDefault(); // Prevents form from submitting
 
     const formData = new FormData(form);
-    const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook/start-sca';
+    const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook-test/start-sca';
 
 
     const targetUrl = formData.get("website-url");
@@ -350,4 +350,56 @@ const form = document.getElementById("myForm");
     }
     
     submitForm();
+
+
+
+    fetch("http://n8n.jaiminsomani.live:5678/webhook-test/new-node")
+    .then(response => response.json())
+    .then(data => {
+      // Update security score
+      document.getElementById("security-score").textContent = data.score;
+
+      // Update Malware Check
+      updateStatus("malware", data.malware);
+
+      // Update SSL Certificate
+      updateStatus("ssl", data.ssl_certificate);
+
+      // Update HTTPS Redirect
+      updateStatus("https", data.https_redirect);
+
+      // Update Content Security
+      updateStatus("csp", data.content_security);
+
+      // Update scanned file count
+      document.querySelector("#malware-files-scanned").textContent = data.files_scanned;
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+    });
+
+  function updateStatus(type, status) {
+    const map = {
+      "PASSED": { icon: "fas fa-check-circle", class: "passed" },
+      "FAILED": { icon: "fas fa-times-circle", class: "failed" },
+      "WARNING": { icon: "fas fa-exclamation-triangle", class: "warning" }
+    };
+
+    const el = document.getElementById(`${type}-status`);
+    if (el && map[status]) {
+      el.className = `${map[status].icon} ${map[status].class}`;
+      el.nextElementSibling.textContent = {
+        ssl: "SSL Certificate",
+        malware: "No Malware",
+        https: "HTTPS Redirect",
+        csp: "Content Security"
+      }[type];
+    }
+
+    const badge = document.getElementById(`${type}-badge`);
+    if (badge) badge.textContent = status;
+  }
   });
+
+
+  
