@@ -317,7 +317,7 @@ const form = document.getElementById("myForm");
     e.preventDefault(); // Prevent default form submission
 
     const formData = new FormData(form);
-    const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook/start-sca';
+    const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook-test/start-sca';
     const resultUrl = 'http://n8n.jaiminsomani.live:5678/webhook-test/new-node';
 
     const targetUrl = formData.get("website-url");

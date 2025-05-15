@@ -79,19 +79,19 @@
                 </div>
                 <div class="summary-stats">
                     <div class="stat-item">
-                        <i class="fas fa-check-circle passed"></i>
+                        <i id="ssl-status" class="fas fa-check-circle passed"></i>
                         <span>SSL Certificate</span>
                     </div>
                     <div class="stat-item">
-                        <i class="fas fa-check-circle passed"></i>
+                        <i id="malware-status" class="fas fa-check-circle passed"></i>
                         <span>No Malware</span>
                     </div>
                     <div class="stat-item">
-                        <i class="fas fa-exclamation-triangle warning"></i>
+                        <i id="https-status" class="fas fa-exclamation-triangle warning"></i>
                         <span>HTTPS Redirect</span>
                     </div>
                     <div class="stat-item">
-                        <i class="fas fa-times-circle failed"></i>
+                        <i id="csp-status" class="fas fa-times-circle failed"></i>
                         <span>Content Security</span>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="card-header">
                         <i class="fas fa-shield-alt"></i>
                         <h3>Malware Check</h3>
-                        <span class="status-badge passed">PASSED</span>
+                        <span id="malware-badge" class="status-badge passed">PASSED</span>
                     </div>
                     <div class="card-content">
                         <p>No malware or suspicious code detected on your website.</p>
@@ -113,8 +113,9 @@
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Files Scanned:</span>
-                                <span class="detail-value">247</span>
+                                <span class="detail-value" id="malware-files-scanned">247</span>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -123,7 +124,7 @@
                     <div class="card-header">
                         <i class="fas fa-lock"></i>
                         <h3>SSL Certificate</h3>
-                        <span class="status-badge passed">PASSED</span>
+                        <span id="ssl-badge" class="status-badge passed">PASSED</span>
                     </div>
                     <div class="card-content">
                         <p>Your SSL certificate is valid and properly configured.</p>
@@ -148,7 +149,7 @@
                     <div class="card-header">
                         <i class="fas fa-exclamation-triangle"></i>
                         <h3>HTTPS Redirect</h3>
-                        <span class="status-badge warning">WARNING</span>
+                        <span id="https-badge" class="status-badge warning">WARNING</span>
                     </div>
                     <div class="card-content">
                         <p>HTTP to HTTPS redirect is not properly configured.</p>
@@ -169,7 +170,7 @@
                     <div class="card-header">
                         <i class="fas fa-times-circle"></i>
                         <h3>Content Security Policy</h3>
-                        <span class="status-badge failed">FAILED</span>
+                        <span id="csp-badge" class="status-badge failed">FAILED</span>
                     </div>
                     <div class="card-content">
                         <p>No Content Security Policy (CSP) header found.</p>
