@@ -310,44 +310,82 @@ function showNotification(message, type) {
       }, 300);
   }, 3000);
 }
+// Form submission handling
 const form = document.getElementById("myForm");
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevents form from submitting
+    e.preventDefault(); // Prevent default form submission
 
     const formData = new FormData(form);
     const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook/start-sca';
-
+    const resultUrl = 'http://n8n.jaiminsomani.live:5678/webhook-test/new-node';
 
     const targetUrl = formData.get("website-url");
     const emailAddress = formData.get("email-url");
 
-    async function submitForm() {
-        const formData = {
-            'Landing Page Url': targetUrl,
-            'Email': emailAddress
-        };
-    
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-    
-            if (response.ok) {
-                console.log('URL sent successfully!');
-                const data = await response.json();
-                console.log('Response:', data);
-            } else {
-                console.error(`HTTP error! status: ${response.status}`);
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
+    async function submitAndFetchResult() {
+      const dataToSend = {
+        'Landing Page Url': targetUrl,
+        'Email': emailAddress
+      };
+
+      try {
+        // Send form data to start the scan
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataToSend)
+        });
+
+        if (!response.ok) {
+          console.error(`HTTP error! Status: ${response.status}`);
+          return;
         }
+
+        console.log('Scan request sent successfully!');
+
+        // Wait a few seconds before fetching results (adjust delay if needed)
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        // Fetch scan results
+        const resultResponse = await fetch(resultUrl);
+        const data = await resultResponse.json();
+
+        // Update HTML with scan results
+        document.getElementById("security-score").textContent = data.score;
+        updateStatus("malware", data.malware);
+        updateStatus("ssl", data.ssl_certificate);
+        updateStatus("https", data.https_redirect);
+        updateStatus("csp", data.content_security);
+        document.getElementById("malware-files-scanned").textContent = data.files_scanned;
+
+      } catch (error) {
+        console.error("Error in scan process:", error);
+      }
     }
-    
-    submitForm();
+
+    function updateStatus(type, status) {
+      const map = {
+        "PASSED": { icon: "fas fa-check-circle", class: "passed" },
+        "FAILED": { icon: "fas fa-times-circle", class: "failed" },
+        "WARNING": { icon: "fas fa-exclamation-triangle", class: "warning" }
+      };
+
+      const el = document.getElementById(`${type}-status`);
+      if (el && map[status]) {
+        el.className = `${map[status].icon} ${map[status].class}`;
+        el.nextElementSibling.textContent = {
+          ssl: "SSL Certificate",
+          malware: "No Malware",
+          https: "HTTPS Redirect",
+          csp: "Content Security"
+        }[type];
+      }
+
+      const badge = document.getElementById(`${type}-badge`);
+      if (badge) badge.textContent = status;
+    }
+
+    // Start the full process
+    submitAndFetchResult();
   });
