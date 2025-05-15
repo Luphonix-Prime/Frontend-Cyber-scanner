@@ -316,7 +316,7 @@ const form = document.getElementById("myForm");
     e.preventDefault(); // Prevents form from submitting
 
     const formData = new FormData(form);
-    const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook-test/start-sca';
+    const webhookUrl = 'http://n8n.jaiminsomani.live:5678/webhook/start-sca';
 
 
     const targetUrl = formData.get("website-url");
@@ -353,7 +353,7 @@ const form = document.getElementById("myForm");
 
 
 
-    fetch("http://n8n.jaiminsomani.live:5678/webhook-test/new-node")
+    fetch("http://n8n.jaiminsomani.live:5678/webhook/new-node")
     .then(response => response.json())
     .then(data => {
       // Update security score
