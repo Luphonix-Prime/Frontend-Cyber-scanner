@@ -18,16 +18,11 @@
     <div class="scanner-container">
         <div class="scanner-header">
             <div class="logo-container">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iODAiIHN0cm9rZT0iIzhCNUNGNiIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIi8+CjxwYXRoIGQ9Ik0xMDAgNDBMMTUwIDEwMEwxMDAgMTYwTDUwIDEwMFoiIHN0cm9rZT0iIzhCNUNGNiIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iMTUiIGZpbGw9IiM4QjVDRjYiLz4KPHBhdGggZD0iTTcwIDcwTDEzMCAxMzAiIHN0cm9rZT0iIzhCNUNGNiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0xMzAgNzBMNzAgMTMwIiBzdHJva2U9IiM4QjVDRjYiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K" alt="Aphelion Cyber Logo">
-                <h1>Aphelion Cyber</h1>
-            </div>
-            <p>Cybersecurity Consultancy & Website Security Scanner</p>
-            <div class="consultancy-info">
-                <p>Professional cybersecurity consulting services and comprehensive security assessments</p>
-                <a href="https://aphelioncyber.com/" target="_blank" class="reference-link">
-                    <i class="fas fa-external-link-alt"></i>
-                    Visit AphelionCyber.com
-                </a>
+                <img src="logo.png" alt="Aphelion Logo" class="logo">
+                <div class="logo-text">
+                    <h1>Web Scanner</h1>
+                    <p>Comprehensive Website Security Scanner</p>
+                </div>
             </div>
         </div>
 
@@ -36,24 +31,25 @@
                 <h2>Scan Your Website</h2>
                 <p>Enter your website URL to check for vulnerabilities, malware, and security issues.</p>
 
-                <form id="myForm" class="scan-form">
-                    <div class="form-group">
-                        <label for="website-url" class="form-label">Website URL</label>
-                        <input type="text" name="website-url" id="website-url" placeholder="https://example.com" class="url-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email-url" class="form-label">Email Address</label>
-                        <input type="email" name="email-url" id="email-url" placeholder="your.email@domain.com" class="url-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <button id="scan-button" type="submit" class="scan-button">
-                            <i class="fas fa-shield-alt"></i>
-                            <span class="button-text">Initialize Security Scan</span>
-                        </button>
-                    </div>
+                <div class="url-input-container">
+                    <form id="myForm">
+                  <table >
+                    <tr style="vertical-align: middle;">
+                      <td> <label for="website-url" style="color:#B23AFC ;">Website URL</label></td>
+                      <td> <input type="text" name="website-url" id="website-url" placeholder="https://example.com" class="url-input"></td>
+                    </tr>
+                    <tr style="vertical-align: middle;">
+                      <td><label for="email-url" style="color:#B23AFC ;">Your Email:</label></td>
+                      <td> <input type="email" name="email-url" id="email-url" placeholder="exampe@gmail.com" class="url-input"></td>
+                    </tr>
+                    <tr style="vertical-align: middle;" >
+                      <td colspan="2" ><button id="scan-button" class="scan-button">
+                      <span class="button-text">Scan Now</span>
+                      <i class="fas fa-shield-alt"></i></td>
+                  </button></tr>
+                  </table>
                 </form>
+                </div>
             </div>
             <div class="scanner-graphic">
                 <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_jzpjbmvd.json" background="transparent" speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
@@ -70,14 +66,9 @@
             </div>
             <div class="scan-status">
                 <p id="current-scan-status">Initializing scan...</p>
-                <div class="scanning-indicator">
-                    <i class="fas fa-shield-alt scanning-icon"></i>
-                    <div class="scanning-dots">
-                        <div class="scanning-dot"></div>
-                        <div class="scanning-dot"></div>
-                        <div class="scanning-dot"></div>
-                    </div>
-                </div>
+            </div>
+            <div class="scanner-animation">
+                <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_ystsffqy.json" background="transparent" speed="1" style="width: 100%; height: 150px;" loop autoplay></lottie-player>
             </div>
         </div>
 
@@ -87,7 +78,7 @@
             <div class="results-summary glassmorphism">
                 <div class="summary-score">
                     <div class="score-circle">
-                        <span id="security-score">0</span>
+                        <span id="security-score">85</span>
                     </div>
                     <p>Security Score</p>
                 </div>
@@ -111,7 +102,7 @@
                 </div>
             </div>
 
-            <!-- <div class="results-details">
+            <div class="results-details">
                 <div class="result-card glassmorphism">
                     <div class="card-header">
                         <i class="fas fa-shield-alt"></i>
@@ -196,13 +187,13 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
-
-            <div class="email-notification">
-                <p><i class="fas fa-envelope"></i> A detailed security report will be sent to your email address shortly.</p>
             </div>
 
             <div class="action-buttons">
+                <button class="action-button download-report">
+                    <i class="fas fa-download"></i>
+                    <span>Download Full Report</span>
+                </button>
                 <button class="action-button new-scan">
                     <i class="fas fa-redo"></i>
                     <span>New Scan</span>
